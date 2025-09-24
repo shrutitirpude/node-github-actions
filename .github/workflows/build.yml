@@ -34,8 +34,8 @@ jobs:
       - name: Install project dependencies
         run: npm install
 
-      - name: Run the project
-        run: node app.js
+      #- name: Run the project
+      #  run: node app.js
 
       #- name: Upload build artifact
       #  uses: actions/upload-artifact@v4
