@@ -28,14 +28,14 @@ jobs:
       - name: Check running versions - Node
         run: node --version
 
-      - name: Check running versions - Bun
-        run: bun --version
+      - name: Check running versions - Node
+        run: node --version
 
       - name: Install project dependencies
-        run: bun install
+        run: npm install
 
-      - name: Build the project
-        run: bun run build
+      - name: Run the project
+        run: node app.js
 
       #- name: Upload build artifact
       #  uses: actions/upload-artifact@v4
