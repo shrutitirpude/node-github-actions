@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands:
+      - docker build -t node_app:latest .
+      - docker tag node_app:latest 391122274211.dkr.ecr.us-east-1.amazonaws.com/node-app-ecr:latest
+  post_build:
+    commands:
+      - docker push 391122274211.dkr.ecr.us-east-1.amazonaws.com/node-app-ecr:latest
+      - printf '[{"name":node-app-task-definition:1,"imageUri":"%s"}]' 391122274211.dkr.ecr.us-east-1.amazonaws.com/node-app-ecr:latest > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
