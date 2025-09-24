@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deploy
+  labels:
+    app: node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+        - name: node-app
+          image: ghcr.io/shrutitirpude/node-github-actions-20:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shruti-deploy-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: node-app
